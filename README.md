@@ -1,2 +1,7 @@
 # tmux
-My Tmux
+My Tmux config and install file
+
+Primary OS 
+centos
+raspbian
+
