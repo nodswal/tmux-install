@@ -55,7 +55,7 @@ echo Tmux     : $TMUX_VER_B
 
 echo DEBUG exit for script development. Eric L.
 
-exit
+# exit
 
 # create our directories
 mkdir -p $HOME/local $HOME/tmux_tmp
