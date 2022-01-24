@@ -1,7 +1,8 @@
 # tmux
-My Tmux config and install file
+Install the Latest versions of Tmux, ncurse, ...
+
 
 Primary OS 
-centos
-raspbian
-
+-Linux Mint
+-RedHat 7
+-raspbian
