@@ -11,4 +11,4 @@ Primary OS
   -raspbian
   
   
-  run tmux-installer.sh as basic user.  
+  run install_tmux.sh as basic user.  
