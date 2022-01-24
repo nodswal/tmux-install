@@ -2,7 +2,7 @@
 
 	# Last modified: 2022/01/11 09:48:13
 
-	# Author: nodswal, d.e.laws@gmail.com
+	# Author: nodswal, https://github.com/nodswal/tmux-install
 
 # A script for installing the latest stable version of Tmux on systems where you don't have root access.
 	# tmux will be installed in $HOME/local/bin.
