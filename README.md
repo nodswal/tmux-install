@@ -1,7 +1,7 @@
 # Tmux Install
 Installs the Latest or noted versions of Tmux, ncurse, libevent in a users homedirectory or system based install.  No root required.  Great for having tmux anywhere you don't have root, school, work (with permission).
 
-Repo's are usually way out of date, and I want to enjoy the Tmux goodness sooner.
+Repo's to install tmux are usually way out of date, and I want to enjoy the Tmux goodness sooner (Now plus compile time, I mean NOW, but I'll have to wait).
 
 basic parse using curl/wget of github and projects homepages to find latest stable versions.
 
