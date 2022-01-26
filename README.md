@@ -3,7 +3,7 @@ Installs the Latest or noted versions of Tmux, ncurse, libevent in a users homed
 
 Repo's to install tmux are usually way out of date, and I want to enjoy the Tmux goodness sooner (Now plus compile time, I mean NOW, but I'll have to wait).
 
-basic parse using curl/wget of github and projects homepages to find latest stable versions.
+It does a basic parse using curl to save the webpage local, and then greps for a stable release using regex to capture the version number.  We then download the files, extract them, build...
 
 
 Primary OS's I have tested with...
