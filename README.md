@@ -22,11 +22,11 @@ Primary OS's I have tested with...
   openssl package ( Not required by my script, but required by tmux build process )
   
   
-run install_tmux.sh as basic user to install to your local home directory.
+run install_tmux.sh as a basic user to install to your local home directory.
   
 or
   
-run as root to install system wide.
+run as root to have the option to install system wide.
   
   
 **Also use at your own risk.  Meaning read through it and test it on a VM before installation.
