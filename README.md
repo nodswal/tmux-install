@@ -1,16 +1,30 @@
-# tmux
-Installs the Latest versions of Tmux, ncurse, ... in a user based install.  No root required.  Great for having tmux anywhere you don't have root, school, work, I suggest speaking with IT before using.
+# tmux Install
+Installs the Latest or noted versions of Tmux, ncurse, libevent in a user or system based install.  No root required.  Great for having tmux anywhere you don't have root, school, work (with permission).
 
-basic parse using curl/wget of github project pages to find latest stable versions.
+basic parse using curl/wget of github and projects homepages to find latest stable versions.
 
 
-Primary OS 
+Primary OS's I have tested with...
 
+  -Ubuntu 20.04 LTS
+  
   -Linux Mint
 
-  -RedHat 7
+  -RedHat 7/8
+  
+  -Centos 7/8
 
-  -raspbian
+  -raspbian (Buster/Strech)
+  
+-Requirements
+  openssl package ( Not required by my script, but required by tmux build process )
   
   
-  run install_tmux.sh as basic user.  
+run install_tmux.sh as basic user to install to your local home directory.
+  
+or
+  
+run as root to install system wide.
+  
+  
+**Also use at your own risk.  Meaning read through it and test it on a VM before installation.
