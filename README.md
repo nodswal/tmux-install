@@ -1,4 +1,4 @@
-# tmux Install
+# Tmux Install
 Installs the Latest or noted versions of Tmux, ncurse, libevent in a user or system based install.  No root required.  Great for having tmux anywhere you don't have root, school, work (with permission).
 
 Repo's are usually way out of date, and I want to enjoy the Tmux goodness sooner.
