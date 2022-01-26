@@ -19,7 +19,8 @@ Primary OS's I have tested with...
   -raspbian (Buster/Strech)
   
 -Requirements
-  openssl package ( Not required by my script, but required by tmux build process )
+  openssl package ( Not required by this script, but required by tmux build process )
+  If you need to know the package read the script.
   
   
 run install_tmux.sh as a basic user to install to your local home directory.
