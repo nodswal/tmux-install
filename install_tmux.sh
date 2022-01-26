@@ -1,38 +1,102 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
-	# Last modified: 2022/01/11 09:48:13
+	# Last modified: 2022/01/26 08:52:11
 
 	# Author: nodswal, https://github.com/nodswal/tmux-install
+	# Even though our paths have crossed, does not mean we are in the same place on our journey.
+	
+		# New to this version
+			# make -j
+			# Root Installation
 
-# A script for installing the latest stable version of Tmux on systems where you don't have root access.
-	# tmux will be installed in $HOME/local/bin.
+
+# Description:
+	# A script for installing the latest stable version of Tmux on system in your home directory so you don't need root access.
+	# Install latest version of Tmux, libevent, ncurse as root.
+
+	# local user install
+		# tmux will be installed in $HOME/local/bin.
+
 	# It's assumed that wget and a C/C++ compiler are installed.
+		# Fix so prompted whatever is missing
 
 
-# add
-	# a Test if tools are installed?s 
+
+# Add
+	# a Test if requirements are installed?
+	# install as root option?
+		# wget/curl url not valid
+		# if fzf and smenu are installed use them?
+
+	# check what OS?
+		# look if requirements are installed
 
 
-# In tmux_reqs.sh
-	# Red Hat, Fedora, CentOS - openssl-devel
-	# Debian, Ubuntu - libssl-dev
-	# Arch - openssl
-	# if raspberry pi, install libssl-dev
+# From Version Control, not stable, just most rescent repo compile
+	# git clone https://github.com/tmux/tmux.git
+	# cd tmux
+	# sh autogen.sh
+	# ./configure
+	# make && sudo make install
 
-# Install in addition?
+
+# Prefer requirements to be installed from same script. ***hostnamectl | grep operating*** system, contains ubuntu, contains red hat, contains centos?
+
+		# Red Hat 7/8, CentOS 7/8
+			# Last Tested:
+			# yum install openssl-devel -y
+
+
+		# Debian, Ubuntu 18.04/20.04 LTS
+			# Last Tested:
+			# apt-get install libssl-dev -y
+
+
+		# Arch 
+			# Last Tested:
+			# pacman -Syu openssl -y
+
+
+		# Raspberry Pi
+			# Last Tested:
+			# apt-get install libssl-dev -y
+
+
+		# Additional OS?
+			# tell me how to install it from new installation
+
+
+# Install in addition? probably not
 	# install fonts-powerline
 	# install powerline
-
 	#  ** need a font that supports symbols installed on windows, nerd tree infuses hundreds of fonts with symbols
 
 
-# python, regex websites to get version????? ???? ??? ???
+# add a .tmux_ns.conf?
+
+
+
+# VirtualBox
+	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
+
+
+#***# code to install local without root was obtained from search on google, when I find where i got that sections from I will created that location.
+# still don't the exact place, but here is a good place https://github.com/tmux/tmux/wiki/Installing
+
 
 
 
 
 ########################
-#     exit on error
+#     Clear Screen     #
+########################
+
+printf '\033c'    # Clear screen
+
+
+
+########################
+#     exit on error    #
 ########################
 
 set -e
@@ -40,17 +104,17 @@ set -e
 
 
 ########################
-#      Debug MODE
+#      Debug MODE      #
 ########################
 
 # echo $? after exit to see the error code it exited for which ever command
+
 # set -x
 
 
 
-
 ################################################
-#      Updated VERSION Defaults 2021.08.25
+#      Updated VERSION Defaults 2022.01.24     #
 ################################################
 
 TMUX_VERSION=3.1b
@@ -59,10 +123,80 @@ NCUR_VER=6.2
 
 
 
+################################################
+#  Root User Detection - Install System Wide?  #
+################################################
+
+if [ "$EUID" -eq 0 ]
+	then read -p "Running script as root, install system wide? [yY] " -n 1 -r
+	echo
+
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		echo "Installing System Wide!"
+		SysWide="yes"
+		sleep 5
+	fi
+
+fi
+
+
+
+################################################
+#     OS Make and Model to make descisions     #
+################################################
+
+CurOSstr=$(hostnamectl | grep Operating)
+
+echo $CurOS
+
+if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
+		echo "Ubuntu, verifying environment!"
+		echo "Verifying libssl-dev"
+		# dpkg -s libssl-dev
+
+
+elif [[ "$CurOSstr" == *"Centos"* ]]; then
+	echo "Verifying Centos environment"
+	echo "install openssl-devel"
+	#rpm -qa | grep openssl-devel
+
+
+elif [[ "$CurOSstr" == *"Red"* ]]; then
+	echo "Verifying Red Hat environment"
+	echo "Verifying openssl-devel"
+	#rpm -qa | grep openssl-devel
+
+
+elif [[ "$CurOSstr" == *"Arch"* ]]; then
+	echo "Verifying Arch environment"
+	echo "Verifying openssl"
+	#pacman -Qi openssl
+
+
+elif [[ "$CurOSstr" == *"Buster"* ]]; then
+	echo "Verifying Raspberry Pi Buster environment"
+	echo "Verifying libssl-dev"
+	# dpkg -s libssl-dev
+
+
+elif [[ "$CurOSstr" == *"Bullseye"* ]]; then
+	echo "Verifying Raspberry Pi BullsEye environment"
+	echo "Verifying libssl-dev"
+	# dpkg -s libssl-dev
+
+
+else
+	echo "Unknown OS, continue trying to install?"
+	echo "Menu? Develope this area!"
+
+
+fi
+
 
 
 ########################################################################
-#      Clean UP in case issue last time
+#      Clean UP in case issue last time                                #
 ########################################################################
 
 [[ -f ~/libevent_org.txt ]] && rm -rf ~/libevent_org.txt
@@ -71,9 +205,8 @@ NCUR_VER=6.2
 
 
 
-
 ########################################################################
-# Find out what the latest version of libevent is to download.
+# Find out what the latest version of libevent is to download.         #
 ########################################################################
 
 echo Querying Versions on https://libevent.org... Please be patient.
@@ -91,9 +224,8 @@ rm -rf ~/libevent_org.txt
 
 
 
-
 ################################################
-# Find out what the newest version of Tmux is
+# Find out what the newest version of Tmux is  #
 ################################################
 
 echo "Querying Version on https://github.com/tmux/tmux/releases... Please be patient."
@@ -111,10 +243,11 @@ rm -rf ~/github_tmux.txt
 
 
 
+################################################
+#    NCurse today has a static release name    #
+################################################
 
-################################################
-# NCurse today has a static release name
-################################################
+#  Adding versioning from archives - https://invisible-mirror.net/archives/ncurses/
 
 echo    # (optional) move to a new line
 echo "Currently the latest version of NCurses will be installed!"
@@ -122,20 +255,27 @@ echo    # (optional) move to a new line
 
 
 
-
 ################################################
 #             Display Versions found           #
 ################################################
 
-echo "Static vaules                    DETECTED VERSIONS from WEBSITES"
-echo "Tmux     : $TMUX_VERSION         New Tmux Ver    : $TMUX_VER_B"
-echo "Libevent : $LIB_VER              New Libevent Ver: $LIB_VER_B"
-echo "NCUR_VER : $NCUR_VER             NCURSE		: Unable to Detect Versions"
+echo "Static vaules"
+echo "Tmux     : $TMUX_VERSION"
+echo "Libevent : $LIB_VER"
+echo "NCUR_VER : $NCUR_VER"
+
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
-sleep 2s
+echo "DETECTED VERSIONS from WEBSITES"
+echo "New Tmux Ver    : $TMUX_VER_B"
+echo "New Libevent Ver: $LIB_VER_B"
+echo "NCURSE		: Unable to Detect Versions of NCurse by design"
 
+sleep 9s
+
+echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 
 
 
@@ -143,15 +283,13 @@ sleep 2s
 #         Prompt to use new version            #
 ################################################
 
-read -p "Use Updated version's yY? " -n 1 -r
+read -p "Use Updated version's from WEBSITE [yY]? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	TMUX_VERSION=$TMUX_VER_B 
 	LIB_VER=$LIB_VER_B 
 fi
-
-
 
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
@@ -160,9 +298,12 @@ echo    # (optional) move to a new line
 echo "Versions to be installed are the following: "
 echo "Tmux: $TMUX_VERSION"
 echo "LibEvent: $LIB_VER"
+echo "LibEvent: Latest"
+
+echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 
 sleep 5
-
 
 
 
@@ -177,15 +318,15 @@ cd $HOME/tmux_tmp
 
 
 
-
 ################################################
 #             Tmux source Download             #
 ################################################
 
+echo    # (optional) move to a new line
 echo "Downloading tmux"
 wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
 echo "Downloaded tmux"
-
+echo    # (optional) move to a new line
 
 
 
@@ -193,14 +334,11 @@ echo "Downloaded tmux"
 #             libevent Download                #
 ################################################
 
-# get libevent.org web page, set newest version to version found
-#wget "https://libevent.org/" -O /tmp/libevent_org.txt
-#LIB_VER=$(grep -Pom 1 "(?<=>libevent-)[\d\.]+(?=-stable\.tar\.gz)" /tmp/libevent_org.txt)
-
+echo    # (optional) move to a new line
 echo "Downloading libevent"
 wget -q https://github.com/libevent/libevent/releases/download/release-${LIB_VER}-stable/libevent-${LIB_VER}-stable.tar.gz
 echo "Downloaded libevent"
-
+echo    # (optional) move to a new line
 
 
 
@@ -208,21 +346,22 @@ echo "Downloaded libevent"
 #             NCurses Download                 #
 ################################################
 
+echo    # (optional) move to a new line
 echo "Downloading ncurse"
 wget -q ftp://ftp.invisible-island.net/ncurses/ncurses.tar.gz
 echo "Downloaded ncurse"
-
+echo    # (optional) move to a new line
 
 
 
     ################################################
-    #                                            #
-################################################
-#    Extract files, Configure, and Compile     #
-################################################
-    #                                            #
+   #                                            #  #
+################################################   #
+#    Extract files, Configure, and Compile     #   #
+################################################   #
+   #                                            #  #
     ################################################
-
+sleep 5
 
 
 
@@ -233,11 +372,15 @@ echo "Downloaded ncurse"
 tar xvzf libevent-${LIB_VER}-stable.tar.gz
 cd libevent-${LIB_VER}-stable
 
-./configure --prefix=$HOME/local --disable-shared
-make
+if [[ $SysWide == "yes" ]]; then
+	./configure --disable-shared
+else
+	./configure --prefix=$HOME/local --disable-shared
+fi
+
+make -j
 make install
 cd ..
-
 
 
 
@@ -246,15 +389,20 @@ cd ..
 ####################################
 
 tar xvzf ncurses.tar.gz
-ncursedir=$(find . -maxdepth 1 -type d -name '*ncur*' -print -quit)
-	#cd ncurses-${NCUR_VER}  #Original 
+
+# change to cd ncurses*/  ???
+ncursedir=$(find . -maxdepth 1 -type d -name '*ncur*' -print -quit)    
 cd $ncursedir				# since I can't get the version number and can't CD into it based on a captured version
 
-./configure --prefix=$HOME/local
-make
+if [[ $SysWide == "yes" ]]; then
+	./configure
+else
+	./configure --prefix=$HOME/local
+fi
+
+make -j
 make install
 cd ..
-
 
 
 
@@ -265,11 +413,17 @@ cd ..
 tar xvzf tmux-${TMUX_VERSION}.tar.gz
 cd tmux-${TMUX_VERSION}
 
-./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include"
-CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" make
-cp -f tmux $HOME/local/bin
-cd ..
+if [[ $SysWide == "yes" ]]; then
+	./configure
+	make -j
+	make install
+else
+	./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include"
+CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" make -j
+	cp -f tmux $HOME/local/bin
+fi
 
+cd ..
 
 
 
@@ -286,10 +440,16 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
-echo "$HOME/local/bin/tmux is now available. You can optionally add $HOME/local/bin to your PATH."
+printf '\033c'    # Clear screen
+echo    # (optional) move to a new line
+
+if [[ $SysWide == "yes" ]]; then
+	echo "Installed System Wide."
+else
+	echo "$HOME/local/bin/tmux is now available. You can optionally add $HOME/local/bin to your PATH."
+fi
 
 exit $?
-
 
 
 
