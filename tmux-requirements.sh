@@ -10,7 +10,7 @@ fi
 # yum install openssl-devel
 # build-essentials probably
 
-echo test
+echo test branch ncurse
 # Raspbian Requirements
 
 
