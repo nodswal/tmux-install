@@ -25,6 +25,7 @@
 # Add
 	# a Test if requirements are installed?
 	# install as root option?
+	# auto update script for github?
 		# wget/curl url not valid
 		# if fzf and smenu are installed use them?
 
