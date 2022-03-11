@@ -37,6 +37,4 @@ or
 -run as root to have the option to install system wide.
   
   
-**Also use at your own risk.  Meaning read through it and test it on a VM before installation.
-
 - Todo
