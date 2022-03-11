@@ -19,15 +19,22 @@ Primary OS's I have tested with...
   -raspbian (Buster/Strech)
   
 -Requirements
-  openssl package ( Not required by this script, but required by tmux build process )
+  openssl package which has libssl ( Not required by this script, but required by tmux build process )
   If you need to know the package read the script.
   
-  
-run install_tmux.sh as a basic user to install to your local home directory.
+# Installation
+wget https://raw.githubusercontent.com/nodswal/tmux-install/master/install_tmux.sh
+
+chmod +x ./install_tmux.sh
+
+./install_tux.sh
+
+
+-run install_tmux.sh as a basic user to install to your local home directory.
   
 or
   
-run as root to have the option to install system wide.
+-run as root to have the option to install system wide.
   
   
 **Also use at your own risk.  Meaning read through it and test it on a VM before installation.
