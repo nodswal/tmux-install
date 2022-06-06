@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
-	# Last modified: 2022/01/26 08:52:11
+	# Last modified: 2022/03/27 21:16:49
+	# NO warrenties are implied by this script, use of script at your own RISK.  AKA Read and use VM to test script before installing on system.
 
 	# Author: nodswal, https://github.com/nodswal/tmux-install
 	# Even though our paths have crossed, does not mean we are in the same place on our journey.
@@ -22,12 +23,13 @@
 
 
 
-# Add
+# Add!
 	# a Test if requirements are installed?
 	# install as root option?
-	# auto update script for github?
-		# wget/curl url not valid
-		# if fzf and smenu are installed use them?
+	# wget/curl url not valid
+	# if fzf and smenu are installed use them?
+	# store versions if not the same as in file?
+
 
 	# check what OS?
 		# look if requirements are installed
@@ -77,12 +79,12 @@
 
 
 
-# VirtualBox
+# VirtualBox ( self note - not related to tmux install )
 	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
 
 
-#***# code to install local without root was obtained from search on google, when I find where i got that sections from I will created that location.
-# still don't the exact place, but here is a good place https://github.com/tmux/tmux/wiki/Installing
+#***# code to install local without root was obtained from search on google, when I find where I got that sections from I will created that location.
+# I still don't know the exact place
 
 
 
@@ -152,9 +154,10 @@ CurOSstr=$(hostnamectl | grep Operating)
 echo $CurOS
 
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
-		echo "Ubuntu, verifying environment!"
-		echo "Verifying libssl-dev"
-		# dpkg -s libssl-dev
+	echo "Ubuntu, verifying environment!"
+	echo "Verifying libssl-dev"
+	sleep 10
+	# dpkg -s libssl-dev
 
 
 elif [[ "$CurOSstr" == *"Centos"* ]]; then
@@ -177,6 +180,12 @@ elif [[ "$CurOSstr" == *"Arch"* ]]; then
 
 elif [[ "$CurOSstr" == *"Buster"* ]]; then
 	echo "Verifying Raspberry Pi Buster environment"
+	echo "Verifying libssl-dev"
+	# dpkg -s libssl-dev
+
+
+elif [[ "$CurOSstr" == *"Stretch"* ]]; then
+	echo "Verifying Raspberry Pi Stretch environment"
 	echo "Verifying libssl-dev"
 	# dpkg -s libssl-dev
 
@@ -451,6 +460,16 @@ else
 fi
 
 exit $?
+
+
+####################################################################################################################################
+#                                                           Extra's?                                                                #
+####################################################################################################################################
+
+# Tmux autocomplete?
+
+
+# add basic config, allow github url to get users config?
 
 
 
