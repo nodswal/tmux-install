@@ -1,92 +1,29 @@
 #!/usr/bin/bash
 
-	# Last modified: 2022/03/27 21:16:49
-	# NO warrenties are implied by this script, use of script at your own RISK.  AKA Read and use VM to test script before installing on system.
+	# Last modified: 2022/08/10 06:46:49
+	
+	# NO warrenties are implied by this script, use of script at your own RISK.  
+	# AKA Read and use VM to test script before installing on system.
+
+	# Project #SaveTheGirl
 
 	# Author: nodswal, https://github.com/nodswal/tmux-install
-	# Even though our paths have crossed, does not mean we are in the same place on our journey.
-	
-		# New to this version
-			# make -j
-			# Root Installation
-
+	# Even though our paths have crossed, does not mean we are in the same place in our journey's.
 
 # Description:
 	# A script for installing the latest stable version of Tmux on system in your home directory so you don't need root access.
 	# Install latest version of Tmux, libevent, ncurse as root.
 
-	# local user install
-		# tmux will be installed in $HOME/local/bin.
-
-	# It's assumed that wget and a C/C++ compiler are installed.
-		# Fix so prompted whatever is missing
-
-
-
-# Add!
-	# a Test if requirements are installed?
-	# install as root option?
-	# wget/curl url not valid
-	# if fzf and smenu are installed use them?
-	# store versions if not the same as in file?
+	
+# New to this version
+	# make -j
+	# Root Installation for  system install
+		# NOTE: IF running as root, install pre-requirements???
 
 
-	# check what OS?
-		# look if requirements are installed
+# Notes/idea's at bottom of script
 
-
-# From Version Control, not stable, just most rescent repo compile
-	# git clone https://github.com/tmux/tmux.git
-	# cd tmux
-	# sh autogen.sh
-	# ./configure
-	# make && sudo make install
-
-
-# Prefer requirements to be installed from same script. ***hostnamectl | grep operating*** system, contains ubuntu, contains red hat, contains centos?
-
-		# Red Hat 7/8, CentOS 7/8
-			# Last Tested:
-			# yum install openssl-devel -y
-
-
-		# Debian, Ubuntu 18.04/20.04 LTS
-			# Last Tested:
-			# apt-get install libssl-dev -y
-
-
-		# Arch 
-			# Last Tested:
-			# pacman -Syu openssl -y
-
-
-		# Raspberry Pi
-			# Last Tested:
-			# apt-get install libssl-dev -y
-
-
-		# Additional OS?
-			# tell me how to install it from new installation
-
-
-# Install in addition? probably not
-	# install fonts-powerline
-	# install powerline
-	#  ** need a font that supports symbols installed on windows, nerd tree infuses hundreds of fonts with symbols
-
-
-# add a .tmux_ns.conf?
-
-
-
-# VirtualBox ( self note - not related to tmux install )
-	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
-
-
-#***# code to install local without root was obtained from search on google, when I find where I got that sections from I will created that location.
-# I still don't know the exact place
-
-
+# Settings file, use settings, auto check for updates?
 
 
 
@@ -120,9 +57,13 @@ set -e
 #      Updated VERSION Defaults 2022.01.24     #
 ################################################
 
+# Create file to have settings for these
+
 TMUX_VERSION=3.1b
 LIB_VER=2.1.12
 NCUR_VER=6.2
+
+
 
 
 
@@ -151,46 +92,46 @@ fi
 
 CurOSstr=$(hostnamectl | grep Operating)
 
-echo $CurOS
+echo $CurOSstr
 
-if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
+if   [[ "$CurOSstr" == *Ubuntu* ]]; then
 	echo "Ubuntu, verifying environment!"
 	echo "Verifying libssl-dev"
 	sleep 10
 	# dpkg -s libssl-dev
 
 
-elif [[ "$CurOSstr" == *"Centos"* ]]; then
+elif [[ "$CurOSstr" == *Centos* ]]; then
 	echo "Verifying Centos environment"
 	echo "install openssl-devel"
 	#rpm -qa | grep openssl-devel
 
 
-elif [[ "$CurOSstr" == *"Red"* ]]; then
+elif [[ "$CurOSstr" == *Red* ]]; then
 	echo "Verifying Red Hat environment"
 	echo "Verifying openssl-devel"
 	#rpm -qa | grep openssl-devel
 
 
-elif [[ "$CurOSstr" == *"Arch"* ]]; then
+elif [[ "$CurOSstr" == *Arch* ]]; then
 	echo "Verifying Arch environment"
 	echo "Verifying openssl"
 	#pacman -Qi openssl
 
 
-elif [[ "$CurOSstr" == *"Buster"* ]]; then
+elif [[ "$CurOSstr" == *Buster* ]]; then
 	echo "Verifying Raspberry Pi Buster environment"
 	echo "Verifying libssl-dev"
 	# dpkg -s libssl-dev
 
 
-elif [[ "$CurOSstr" == *"Stretch"* ]]; then
+elif [[ "$CurOSstr" == *Stretch* ]]; then
 	echo "Verifying Raspberry Pi Stretch environment"
 	echo "Verifying libssl-dev"
 	# dpkg -s libssl-dev
 
 
-elif [[ "$CurOSstr" == *"Bullseye"* ]]; then
+elif [[ "$CurOSstr" == *Bullseye* ]]; then
 	echo "Verifying Raspberry Pi BullsEye environment"
 	echo "Verifying libssl-dev"
 	# dpkg -s libssl-dev
@@ -364,13 +305,14 @@ echo    # (optional) move to a new line
 
 
 
-    ################################################
-   #                                            #  #
-################################################   #
-#    Extract files, Configure, and Compile     #   #
-################################################   #
-   #                                            #  #
-    ################################################
+################################################
+#                                           #  #
+################################################
+#    Extract files, Configure, and Compi    #  #
+################################################
+#                                           #  #
+################################################
+
 sleep 5
 
 
@@ -466,10 +408,87 @@ exit $?
 #                                                           Extra's?                                                                #
 ####################################################################################################################################
 
-# Tmux autocomplete?
-
+# Tmux autocomplete? github?
 
 # add basic config, allow github url to get users config?
+
+
+# local user install
+		# tmux will be installed in $HOME/local/bin.
+		# PROMPT for location?
+			# TEST if you have permission?
+
+	# It's assumed that wget and a C/C++ compiler are installed.
+		# Fix so prompted whatever is missing
+
+
+
+# Add!
+	# a Test if requirements are installed?
+	# install as root option?
+	# wget/curl url not valid
+	# if fzf and smenu are installed use them?
+	# store versions if not the same as in file?
+
+
+	# check what OS?
+		# look if requirements are installed
+
+
+# From Version Control, not stable, just most rescent repo compile
+	# git clone https://github.com/tmux/tmux.git
+	# cd tmux
+	# sh autogen.sh
+	# ./configure
+	# make && sudo make install
+
+
+# Prefer requirements to be installed from same script. ***hostnamectl | grep operating*** system, contains ubuntu, contains red hat, contains centos?
+
+		# Red Hat 7/8/9, Rocky 8/9, CentOS 7
+			# Last Tested:
+			# yum install openssl-devel -y
+
+
+		# Debian, Ubuntu 18.04 LTS
+		#				 20.04 LTS
+		#				 22.04 LTS
+			# Last Tested:
+			# apt-get install libssl-dev -y
+
+
+		# Arch - 
+			# Last Tested:
+			# pacman -Syu openssl -y
+
+
+		# Raspberry Pi - Stretch/jessie/...
+			# Last Tested:
+			# apt-get install libssl-dev -y
+
+
+		# Additional OS?
+			# tell me how to install it from new installation
+
+
+# Install in addition? probably not, maybe options for?
+	# install fonts-powerline
+	# install powerline
+	#  ** need a font that supports symbols installed on windows, nerd tree infuses hundreds of fonts with symbols
+
+
+# add a .tmux_nod.conf?
+
+# have script periodicly check for tmux updates on github?
+
+
+# VirtualBox ( self note - not related to tmux install )
+	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
+
+
+#***# code to install local without root was obtained from search on google, when I find where I got that sections from I will created that location.
+# I still don't know the exact place
+
 
 
 
