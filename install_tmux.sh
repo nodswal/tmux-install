@@ -1,92 +1,18 @@
 #!/usr/bin/bash
 
-	# Last modified: 2022/03/27 21:16:49
+	# Last modified: 2022/08/10 22:43:49
 	# NO warrenties are implied by this script, use of script at your own RISK.  AKA Read and use VM to test script before installing on system.
 
 	# Author: nodswal, https://github.com/nodswal/tmux-install
 	# Even though our paths have crossed, does not mean we are in the same place on our journey.
 	
 		# New to this version
-			# make -j
-			# Root Installation
+			# Detect NCurses Version
 
 
 # Description:
 	# A script for installing the latest stable version of Tmux on system in your home directory so you don't need root access.
 	# Install latest version of Tmux, libevent, ncurse as root.
-
-	# local user install
-		# tmux will be installed in $HOME/local/bin.
-
-	# It's assumed that wget and a C/C++ compiler are installed.
-		# Fix so prompted whatever is missing
-
-
-
-# Add!
-	# a Test if requirements are installed?
-	# install as root option?
-	# wget/curl url not valid
-	# if fzf and smenu are installed use them?
-	# store versions if not the same as in file?
-
-
-	# check what OS?
-		# look if requirements are installed
-
-
-# From Version Control, not stable, just most rescent repo compile
-	# git clone https://github.com/tmux/tmux.git
-	# cd tmux
-	# sh autogen.sh
-	# ./configure
-	# make && sudo make install
-
-
-# Prefer requirements to be installed from same script. ***hostnamectl | grep operating*** system, contains ubuntu, contains red hat, contains centos?
-
-		# Red Hat 7/8, CentOS 7/8
-			# Last Tested:
-			# yum install openssl-devel -y
-
-
-		# Debian, Ubuntu 18.04/20.04 LTS
-			# Last Tested:
-			# apt-get install libssl-dev -y
-
-
-		# Arch 
-			# Last Tested:
-			# pacman -Syu openssl -y
-
-
-		# Raspberry Pi
-			# Last Tested:
-			# apt-get install libssl-dev -y
-
-
-		# Additional OS?
-			# tell me how to install it from new installation
-
-
-# Install in addition? probably not
-	# install fonts-powerline
-	# install powerline
-	#  ** need a font that supports symbols installed on windows, nerd tree infuses hundreds of fonts with symbols
-
-
-# add a .tmux_ns.conf?
-
-
-
-# VirtualBox ( self note - not related to tmux install )
-	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
-
-
-#***# code to install local without root was obtained from search on google, when I find where I got that sections from I will created that location.
-# I still don't know the exact place
-
-
 
 
 
@@ -211,6 +137,8 @@ fi
 
 [[ -f ~/libevent_org.txt ]] && rm -rf ~/libevent_org.txt
 [[ -f ~/github_tmux.txt ]] && rm -rf ~/github_tmux.txt
+[[ -f ~/mirror_ncurse.txt ]] && rm -rf ~/mirror_ncurse.txt
+
 [ -d "$HOME/tmux_tmp" ] && rm -rf $HOME/tmux_tmp
 
 
@@ -258,10 +186,19 @@ rm -rf ~/github_tmux.txt
 ################################################
 
 #  Adding versioning from archives - https://invisible-mirror.net/archives/ncurses/
+echo "Querying Version on https://invisible-mirror.net/archives/ncurses/?C=M;O=D... Please be patient."
+wget --no-check-certificate -q "https://invisible-mirror.net/archives/ncurses/?C=M;O=D" -O ~/mirror_ncurse.txt
+sleep 1
+
+NCUR_VER_B=$(grep -Pom 1 "(?<=>ncurses-)[\d\.]+(?:\w)(?=\.tar\.gz)" ~/mirror_ncurse.txt)
+
 
 echo    # (optional) move to a new line
-echo "Currently the latest version of NCurses will be installed!"
+echo Detected NCurses $NCUR_VER_B on NCurses Mirror.
 echo    # (optional) move to a new line
+
+sleep 2
+rm -rf ~/mirror_ncurse.txt
 
 
 
@@ -278,11 +215,11 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
 echo "DETECTED VERSIONS from WEBSITES"
-echo "New Tmux Ver    : $TMUX_VER_B"
-echo "New Libevent Ver: $LIB_VER_B"
-echo "NCURSE		: Unable to Detect Versions of NCurse by design"
+echo "Newest Tmux Ver    : 		$TMUX_VER_B"
+echo "Newest Libevent Ver: 		$LIB_VER_B"
+echo "Newest NCURSES Ver : 		$NCUR_VER_B"
 
-sleep 9s
+sleep 5s
 
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
@@ -298,7 +235,8 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	TMUX_VERSION=$TMUX_VER_B 
-	LIB_VER=$LIB_VER_B 
+	LIB_VER=$LIB_VER_B
+	NCUR_VER=$NCUR_VER_B 
 fi
 
 echo    # (optional) move to a new line
@@ -306,9 +244,9 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
 echo "Versions to be installed are the following: "
-echo "Tmux: $TMUX_VERSION"
+echo "Tmux:     $TMUX_VERSION"
 echo "LibEvent: $LIB_VER"
-echo "LibEvent: Latest"
+echo "NCurses:  $NCUR_VER"
 
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
@@ -358,19 +296,18 @@ echo    # (optional) move to a new line
 
 echo    # (optional) move to a new line
 echo "Downloading ncurse"
-wget -q ftp://ftp.invisible-island.net/ncurses/ncurses.tar.gz
+# wget -q ftp://ftp.invisible-island.net/ncurses/ncurses.tar.gz
+wget -q https://invisible-mirror.net/archives/ncurses/ncurses-${NCUR_VER}.tar.gz
 echo "Downloaded ncurse"
 echo    # (optional) move to a new line
 
 
 
-    ################################################
-   #                                            #  #
-################################################   #
-#    Extract files, Configure, and Compile     #   #
-################################################   #
-   #                                            #  #
-    ################################################
+
+################################################
+#    Extract files, Configure, and Compile  #  #
+################################################
+
 sleep 5
 
 
@@ -398,11 +335,13 @@ cd ..
 #        Ncurses  Extraction       #
 ####################################
 
-tar xvzf ncurses.tar.gz
+tar xvzf ncurses-${NCUR_VER}.tar.gz
+
+cd ncurses*/
 
 # change to cd ncurses*/  ???
-ncursedir=$(find . -maxdepth 1 -type d -name '*ncur*' -print -quit)    
-cd $ncursedir				# since I can't get the version number and can't CD into it based on a captured version
+# ncursedir=$(find . -maxdepth 1 -type d -name '*ncur*' -print -quit)    
+# cd $ncursedir				# since I can't get the version number and can't CD into it based on a captured version
 
 if [[ $SysWide == "yes" ]]; then
 	./configure
@@ -470,6 +409,81 @@ exit $?
 
 
 # add basic config, allow github url to get users config?
+
+
+
+
+
+	# local user install
+		# tmux will be installed in $HOME/local/bin.
+
+	# It's assumed that wget and a C/C++ compiler are installed.
+		# Fix so prompted whatever is missing
+
+
+
+# Add!
+	# a Test if requirements are installed?
+	# install as root option?
+	# wget/curl url not valid
+	# if fzf and smenu are installed use them?
+	# store versions if not the same as in file?
+
+
+	# check what OS?
+		# look if requirements are installed
+
+
+# From Version Control, not stable, just most rescent repo compile
+	# git clone https://github.com/tmux/tmux.git
+	# cd tmux
+	# sh autogen.sh
+	# ./configure
+	# make && sudo make install
+
+
+# Prefer requirements to be installed from same script. ***hostnamectl | grep operating*** system, contains ubuntu, contains red hat, contains centos?
+
+		# Red Hat 7/8, CentOS 7/8
+			# Last Tested:
+			# yum install openssl-devel -y
+
+
+		# Debian, Ubuntu 18.04/20.04 LTS
+			# Last Tested:
+			# apt-get install libssl-dev -y
+
+
+		# Arch 
+			# Last Tested:
+			# pacman -Syu openssl -y
+
+
+		# Raspberry Pi
+			# Last Tested:
+			# apt-get install libssl-dev -y
+
+
+		# Additional OS?
+			# tell me how to install it from new installation
+
+
+# Install in addition? probably not
+	# install fonts-powerline
+	# install powerline
+	#  ** need a font that supports symbols installed on windows, nerd tree infuses hundreds of fonts with symbols
+
+
+# add a .tmux_ns.conf?
+
+
+
+# VirtualBox ( self note - not related to tmux install )
+	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
+
+
+#***# code to install local without root was obtained from search on google, when I find where I got that sections from I will created that location.
+# I still don't know the exact place
 
 
 
