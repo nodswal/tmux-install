@@ -1,18 +1,20 @@
 #!/usr/bin/bash
 
 	# Last modified: 2022/08/10 22:43:49
-	# NO warrenties are implied by this script, use of script at your own RISK.  AKA Read and use VM to test script before installing on system.
+
+	# NO warrenties are implied by this script, use of script at your own RISK.  
+	# AKA Read and use VM to test script before installing on system.
 
 	# Author: nodswal, https://github.com/nodswal/tmux-install
-	# Even though our paths have crossed, does not mean we are in the same place on our journey.
+	# Even though our paths have crossed, this does not mean we are in the same place in our journey.
 	
-		# New to this version
-			# Detect NCurses Version
+	# New to this version
+		# Detect NCurses Version
 
 
 # Description:
 	# A script for installing the latest stable version of Tmux on system in your home directory so you don't need root access.
-	# Install latest version of Tmux, libevent, ncurse as root.
+	# Install latest version of Tmux, libevent, ncurse as standard user in home directory, or system wide as root.
 
 
 
