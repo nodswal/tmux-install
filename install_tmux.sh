@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# Master <
+# Master < ncurse_purse
 
 	# Last modified: 2022/08/10 22:43:49
 
@@ -21,6 +21,13 @@
 	# get latest branches data from github 				= 		# git pull
 	# switch branch
 	
+
+
+########################
+#      Variables       #
+########################
+
+InstallPath="$HOME/local"
 
 
 
