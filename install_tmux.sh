@@ -20,7 +20,7 @@
 	# store changes if any made before pull 			= 		# git stash
 	# get latest branches data from github 				= 		# git pull
 	# switch branch
-	# testing git process
+	# testing git process, some more
 	
 
 
