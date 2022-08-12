@@ -16,6 +16,12 @@
 	# A script for installing the latest stable version of Tmux on system in your home directory so you don't need root access.
 	# Install latest version of Tmux, libevent, ncurse as standard user in home directory, or system wide as root.
 
+	# store changes if any made before pull 			= 		# git stash
+	# get latest branches data from github 				= 		# git pull
+	# switch branch
+	
+
+
 
 
 ########################
