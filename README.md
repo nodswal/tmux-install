@@ -23,6 +23,16 @@ Primary OS's I have tested with...
   If you need to know the package read the script.
   
 # Installation
+
+git clone https://github.com/nodswal/tmux-install
+
+$ Upgrade script
+cd ~/.tmux-install && git pull 
+  # && ./install  # Not sure what I will do with a previous version
+  # Maybe name tmux3_2a and an alias or symbolic link from tmux
+  # When building the next one I can go back.
+
+
 wget https://raw.githubusercontent.com/nodswal/tmux-install/master/install_tmux.sh
 
 chmod +x ./install_tmux.sh
