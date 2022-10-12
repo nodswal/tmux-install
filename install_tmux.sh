@@ -24,7 +24,11 @@
 
 
 #Detect age of script, prompt for git pull?
+# git reset --hard # chmod +x ./install_tmux.sh causes change
 # git pull
+# chmod +x ./install_tmux.sh
+# ./install_tmux.sh
+
 
 # ADD if ~/.tmux.conf exist, name ~/.tmuxNS.conf ?
 # prompt if they want it at all
@@ -329,9 +333,10 @@ echo    # (optional) move to a new line
 echo "Downloading tmux"
 echo    # (optional) move to a new line
 # Orig :: wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
-wget -q https://github.com/tmux/tmux/archive/refs/tags/${TMUX_VERSION}.tar.gz
+wget --output-document=tmux-${TMUX_VERSION}.tar.gz -q https://github.com/tmux/tmux/archive/refs/tags/${TMUX_VERSION}.tar.gz
 echo "Downloaded tmux"
 echo    # (optional) move to a new line
+
 
 
 
