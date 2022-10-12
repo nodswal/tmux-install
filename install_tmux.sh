@@ -21,11 +21,15 @@
 	# get latest branches data from github 				= 		# git pull
 	# switch branch
 	# testing git process, some more
-	
-# ADD if ~/.tmux.conf exist, name ~/.tmuxNodSwal.conf ?
+
+
+#Detect age of script, prompt for git pull?
+# git pull
+
+# ADD if ~/.tmux.conf exist, name ~/.tmuxNS.conf ?
 # prompt if they want it at all
 # have basic and nod influenced
-cat <<EOF > ~/.tmux.conf
+cat <<EOF > ~/.tmuxNS.conf
 
 # Set prefix to Ctrl-Space instead of Ctrl-b
 unbind C-b
@@ -45,14 +49,10 @@ bind r source-file ~/.tmux.conf \; display "Config reloaded!"
 
 unbind-key -T copy-mode-vi v
 
-bind-key -T copy-mode-vi v \
-  send-keys -X begin-selection
-bind-key -T copy-mode-vi 'C-v' \
-  send-keys -X rectangle-toggle
-bind-key -T copy-mode-vi y \
-  send-keys -X copy-pipe-and-cancel "pbcopy"
-bind-key -T copy-mode-vi MouseDragEnd1Pane \
-  send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
   
 EOF
 
@@ -84,7 +84,6 @@ set -e
 
 # Enable Debugging
 # set -x
-
 
 
 
@@ -121,8 +120,8 @@ fi
 #     OS Make and Model to make descisions     #
 ################################################
 
-# do i need build tools for each OS?
-# ubuntu :: sudo apt install build-essential
+# Do I need build tools for each OS?
+# Ubuntu :: sudo apt install build-essential
 
 CurOSstr=$(hostnamectl | grep Operating)
 
@@ -131,7 +130,9 @@ echo $CurOS
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
 	echo "Verifying libssl-dev"
+	sudo apt-get install libssl-dev
 	sleep 10
+	sudo -k
 	# dpkg -s libssl-dev
 
 
@@ -259,7 +260,7 @@ rm -rf ~/mirror_ncurse.txt
 #             Display Versions found           #
 ################################################
 
-echo "Static vaules"
+echo "Static script versions."
 echo "Tmux     : $TMUX_VERSION"
 echo "Libevent : $LIB_VER"
 echo "NCUR_VER : $NCUR_VER"
@@ -267,7 +268,7 @@ echo "NCUR_VER : $NCUR_VER"
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
-echo "DETECTED VERSIONS from WEBSITES"
+echo "DETECTED VERSIONS from WEBSITES:"
 echo "Newest Tmux Ver    : 		$TMUX_VER_B"
 echo "Newest Libevent Ver: 		$LIB_VER_B"
 echo "Newest NCURSES Ver : 		$NCUR_VER_B"
@@ -324,7 +325,9 @@ cd $HOME/tmux_tmp
 ################################################
 
 echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 echo "Downloading tmux"
+echo    # (optional) move to a new line
 # Orig :: wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
 wget -q https://github.com/tmux/tmux/archive/refs/tags/${TMUX_VERSION}.tar.gz
 echo "Downloaded tmux"
@@ -337,7 +340,9 @@ echo    # (optional) move to a new line
 ################################################
 
 echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 echo "Downloading libevent"
+echo    # (optional) move to a new line
 wget -q https://github.com/libevent/libevent/releases/download/release-${LIB_VER}-stable/libevent-${LIB_VER}-stable.tar.gz
 echo "Downloaded libevent"
 echo    # (optional) move to a new line
@@ -349,7 +354,9 @@ echo    # (optional) move to a new line
 ################################################
 
 echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 echo "Downloading ncurse"
+echo    # (optional) move to a new line
 # wget -q ftp://ftp.invisible-island.net/ncurses/ncurses.tar.gz
 wget -q https://invisible-mirror.net/archives/ncurses/ncurses-${NCUR_VER}.tar.gz
 echo "Downloaded ncurse"
@@ -359,7 +366,7 @@ echo    # (optional) move to a new line
 
 
 ################################################
-#    Extract files, Configure, and Compile  #  #
+#    Extract files, Configure, and Compile     #
 ################################################
 
 sleep 5
