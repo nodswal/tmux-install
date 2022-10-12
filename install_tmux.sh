@@ -87,7 +87,7 @@ set -e
 # echo $? after exit to see the error code it exited for which ever command
 
 # Enable Debugging
-# set -x
+set -x
 
 
 
