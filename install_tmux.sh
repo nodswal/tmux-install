@@ -134,8 +134,8 @@ echo $CurOS
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
 	echo "Verifying libssl-dev"
-	sudo apt-get install libssl-dev
-	sleep 10
+	sudo apt-get install libssl-dev autotools-dev
+	sleep 5
 	sudo -k
 	# dpkg -s libssl-dev
 
@@ -210,6 +210,7 @@ LIB_VER_B=$(grep -Pom 1 "(?<=>libevent-)[\d\.]+(?=-stable\.tar\.gz)" ~/libevent_
 echo    # (optional) move to a new line
 echo "Detected LibEvent $LIB_VER_B"
 echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 
 sleep 2
 rm -rf ~/libevent_org.txt
@@ -233,6 +234,7 @@ TMUX_VER_B=$(grep -Pom 1 "[\d\.]+(?:\w)(?=\.tar\.gz)" ~/github_tmux.txt)
 echo    # (optional) move to a new line
 echo Detected TMUX $TMUX_VER_B on GitHub
 echo    # (optional) move to a new line
+echo    # (optional) move to a new line
 
 sleep 2
 rm -rf ~/github_tmux.txt
@@ -253,6 +255,7 @@ NCUR_VER_B=$(grep -Pom 1 "(?<=>ncurses-)[\d\.]+(?:\w)(?=\.tar\.gz)" ~/mirror_ncu
 
 echo    # (optional) move to a new line
 echo Detected NCurses $NCUR_VER_B on NCurses Mirror.
+echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
 sleep 2
