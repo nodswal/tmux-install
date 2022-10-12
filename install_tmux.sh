@@ -193,7 +193,7 @@ fi
 [[ -f ~/github_tmux.txt ]] && rm -rf ~/github_tmux.txt
 [[ -f ~/mirror_ncurse.txt ]] && rm -rf ~/mirror_ncurse.txt
 
-[ -d "$HOME/tmux_tmp" ] && rm -rf $HOME/tmux_tmp
+[ -d "$HOME/tmux_tmp" ] && rm -rf $HOME/tmux_tmp && echo "Clean up $HOME/tmux_tmp" && sleep 5
 
 
 
