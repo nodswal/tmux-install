@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 # Master <
 
-	# Last modified: 2022/08/10 22:43:49
+	# Last modified: 2022/10/12 9:00:00
 
 	# NO warrenties are implied by this script, use of script at your own RISK.  
-	# AKA Read and use VM to test script before installing on system.
+	# AKA Read and use VM to test script before using on a system.
 
 	# Author: nodswal, https://github.com/nodswal/tmux-install
 	# Even though our paths have crossed, this does not mean we are in the same place in our journey.
@@ -22,7 +22,41 @@
 	# switch branch
 	# testing git process, some more
 	
+# ADD if ~/.tmux.conf exist, name ~/.tmuxNodSwal.conf ?
+# prompt if they want it at all
+# have basic and nod influenced
+cat <<EOF > ~/.tmux.conf
 
+# Set prefix to Ctrl-Space instead of Ctrl-b
+unbind C-b
+set -g prefix C-Space
+bind Space send-prefix
+
+# Split windows using | and -
+unbind '"'
+unbind %
+bind | split-window -h
+bind - split-window -v
+
+# Mouse mode
+set -g mouse on
+
+bind r source-file ~/.tmux.conf \; display "Config reloaded!"
+
+unbind-key -T copy-mode-vi v
+
+bind-key -T copy-mode-vi v \
+  send-keys -X begin-selection
+bind-key -T copy-mode-vi 'C-v' \
+  send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y \
+  send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi MouseDragEnd1Pane \
+  send-keys -X copy-pipe-and-cancel "pbcopy"
+  
+EOF
+
+# look at this .tmux.conf idea's - https://dev.to/iggredible/useful-tmux-configuration-examples-k3g
 
 
 
@@ -48,7 +82,9 @@ set -e
 
 # echo $? after exit to see the error code it exited for which ever command
 
+# Enable Debugging
 # set -x
+
 
 
 
@@ -84,6 +120,9 @@ fi
 ################################################
 #     OS Make and Model to make descisions     #
 ################################################
+
+# do i need build tools for each OS?
+# ubuntu :: sudo apt install build-essential
 
 CurOSstr=$(hostnamectl | grep Operating)
 
@@ -177,10 +216,14 @@ rm -rf ~/libevent_org.txt
 ################################################
 
 echo "Querying Version on https://github.com/tmux/tmux/releases... Please be patient."
-wget --no-check-certificate -q "https://github.com/tmux/tmux/releases" -O ~/github_tmux.txt
+# orig :: wget --no-check-certificate -q "https://github.com/tmux/tmux/releases" -O ~/github_tmux.txt
+wget --no-check-certificate -q "https://github.com/tmux/tmux/tags" -O ~/github_tmux.txt
+
 sleep 1
 
-TMUX_VER_B=$(grep -Pom 1 "(?<=>tmux-)[\d\.]+(?:\w)(?=\.tar\.gz)" ~/github_tmux.txt)
+# orig :: TMUX_VER_B=$(grep -Pom 1 "(?<=>tmux-)[\d\.]+(?:\w)(?=\.tar\.gz)" ~/github_tmux.txt)
+TMUX_VER_B=$(grep -Pom 1 "[\d\.]+(?:\w)(?=\.tar\.gz)" ~/github_tmux.txt)
+
 
 echo    # (optional) move to a new line
 echo Detected TMUX $TMUX_VER_B on GitHub
@@ -282,7 +325,8 @@ cd $HOME/tmux_tmp
 
 echo    # (optional) move to a new line
 echo "Downloading tmux"
-wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
+# Orig :: wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
+wget -q https://github.com/tmux/tmux/archive/refs/tags/${TMUX_VERSION}.tar.gz
 echo "Downloaded tmux"
 echo    # (optional) move to a new line
 
@@ -416,6 +460,7 @@ exit $?
 ####################################################################################################################################
 
 # Tmux autocomplete?
+# curl https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux > ~/.bash_completion
 
 
 # add basic config, allow github url to get users config?
