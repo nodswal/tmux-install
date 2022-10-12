@@ -134,7 +134,7 @@ echo $CurOS
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
 	echo "Verifying libssl-dev"
-	sudo apt-get install libssl-dev autotools-dev automake pkg-config
+	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison
 	sleep 5
 	sudo -k
 	# dpkg -s libssl-dev
