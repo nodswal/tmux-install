@@ -134,7 +134,7 @@ echo $CurOS
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
 	echo "Verifying libssl-dev"
-	sudo apt-get install libssl-dev autotools-dev
+	sudo apt-get install libssl-dev autotools-dev automake
 	sleep 5
 	sudo -k
 	# dpkg -s libssl-dev
@@ -193,7 +193,7 @@ fi
 [[ -f ~/github_tmux.txt ]] && rm -rf ~/github_tmux.txt
 [[ -f ~/mirror_ncurse.txt ]] && rm -rf ~/mirror_ncurse.txt
 
-[ -d "$HOME/tmux_tmp" ] && rm -rf $HOME/tmux_tmp && echo "Clean up $HOME/tmux_tmp" && sleep 5
+[ -d "$HOME/tmux_tmp" ] && rm -rf $HOME/tmux_tmp && echo "Clean up $HOME/tmux_tmp" && sleep 15
 
 
 
@@ -432,10 +432,12 @@ tar xvzf tmux-${TMUX_VERSION}.tar.gz
 cd tmux-${TMUX_VERSION}
 
 if [[ $SysWide == "yes" ]]; then
+	sh ./autogen.sh
 	./configure
 	make -j
 	make install
 else
+	sh ./autogen.sh
 	./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include" CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" 
 
 	make -j
