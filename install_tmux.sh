@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-	# Last modified: 2022/10/12 9:00:00
+	# Last modified: 2022/12/15 08:48:43
 
 	# NO warrenties are implied by this script, use of script at your own RISK.  
 	# AKA Read and use VM to test script before using on a system.
@@ -443,7 +443,7 @@ else
 	make -j
 	
 	cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}
-	ln -s $HOME/local/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
+		ln -s $HOME/local/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
 	# ln -s file link
 fi
 
@@ -471,6 +471,7 @@ if [[ $SysWide == "yes" ]]; then
 	echo "Installed System Wide."
 else
 	echo "$HOME/local/bin/tmux is now available. You can optionally add $HOME/local/bin to your PATH."
+	echo "export PATH=\$PATH:\$HOME/local/bin # TmuxInstaller" >> ~/.bashrc
 fi
 
 exit $?
