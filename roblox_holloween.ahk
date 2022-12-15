@@ -1,6 +1,8 @@
 CoordMode, pixel, Screen
 CoordMode, mouse, screen
 
+; # Last modified: 2022/12/15 09:18:01
+
 ; fget, fspleef, fchicatrice, fjump
 ; fspleef()
 fjump()
