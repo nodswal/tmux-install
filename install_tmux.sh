@@ -1,39 +1,63 @@
 #!/usr/bin/bash
 # Master <
 
-	# Last modified: 2022/12/15 08:48:43
+# Last modified: 2023/01/16 19:33:55
 
-	# NO warrenties are implied by this script, use of script at your own RISK.  
-	# AKA Read and use VM to test script before using on a system.
+# * NO warrenties are implied by this script, use of script is at your own RISK.
+	# AKA Read and use VM to test script before using it on a system.
 
-	# Author: nodswal, https://github.com/nodswal/tmux-install
-	# Even though our paths have crossed, this does not mean we are in the same place in our journey.
-	
-	# New to this version
-		# Detect NCurses Version
+# * Author: NodSwal, https://github.com/nodswal/tmux-install
+	# Even though our paths have crossed, that does not mean we are in the same place in our journies.
 
 
-# Description:
+# * Description:
 	# A script for installing the latest stable version of Tmux on system in your home directory so you don't need root access.
 	# Install latest version of Tmux, libevent, ncurse as standard user in home directory, or system wide as root.
 
+
+# * New to this version
+	# Detect NCurses Version
+
+
+# ? MY git Notes
 	# store changes if any made before pull 			= 		# git stash
 	# get latest branches data from github 				= 		# git pull
 	# switch branch
 	# testing git process, some more
 
 
-#Detect age of script, prompt for git pull?
+# * Detect age of script, prompt for git pull?
 # git reset --hard # chmod +x ./install_tmux.sh causes change
 # git pull
 # chmod +x ./install_tmux.sh
 # ./install_tmux.sh
 
 
-# ADD if ~/.tmux.conf exist, name ~/.tmuxNS.conf ?
-# prompt if they want it at all
-# have basic and nod influenced
-cat <<EOF > ~/.tmuxNS.conf
+# * ADD if ~/.tmux.conf exist, name ~/.tmux-NodSwal.conf ?
+	# * Maybe add to a non root directory ( ~/ )
+	# have basic and Nod influenced .tmux scripts
+
+
+##########################
+# *   Install script   * #
+##########################
+	# git clone or git download script
+	# chmod +x ./tmux-install.sh
+	# ./tmux-install.sh or sudo ./tmux-install.sh
+
+
+# * better
+# ! deprecated method, do not use || warning
+# ? should this method be exposed in the public api
+# TODO: refactor this moethod
+# @param myParam 
+#
+
+
+# * Create .tmux-NodSwal.conf
+cat <<EOF > ~/.tmux-NodSwal.conf
+
+# Config for version 3.0+
 
 # Set prefix to Ctrl-Space instead of Ctrl-b
 unbind C-b
@@ -57,10 +81,19 @@ bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
 bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
-  
+
+# install xclip ?
+# plugins ?
+# fzf ?
+
+# * use ctrl + space is prefix?
+# unbind C-Space
+# set -g prefix C-Space
+# bind C-Space send-prefix
+
+
 EOF
 
-# look at this .tmux.conf idea's - https://dev.to/iggredible/useful-tmux-configuration-examples-k3g
 
 
 
@@ -92,17 +125,19 @@ set -x
 
 
 ################################################
-#      Updated VERSION Defaults 2022.01.24     #
+# *     Updated VERSION Defaults 2023.01.12     #
 ################################################
 
-TMUX_VERSION=3.1b
+# left as older versions for testing the parse for new versions
+
+TMUX_VERSION=3.1a
 LIB_VER=2.1.12
 NCUR_VER=6.2
 
 
 
 ################################################
-#  Root User Detection - Install System Wide?  #
+# * Root User Detection - Install System Wide?  #
 ################################################
 
 if [ "$EUID" -eq 0 ]
@@ -121,11 +156,17 @@ fi
 
 
 ################################################
-#     OS Make and Model to make descisions     #
+# TODO    OS Make and Model to make descisions     #
 ################################################
 
 # Do I need build tools for each OS?
 # Ubuntu :: sudo apt install build-essential
+
+# xclip ?
+# libssl-dev ?
+
+# base install, update, and test script, what does it need to install
+
 
 CurOSstr=$(hostnamectl | grep Operating)
 
@@ -186,7 +227,7 @@ fi
 
 
 ########################################################################
-#      Clean UP in case issue last time                                #
+#                  Clean UP in case issue last run                     #
 ########################################################################
 
 [[ -f ~/libevent_org.txt ]] && rm -rf ~/libevent_org.txt
@@ -198,7 +239,7 @@ fi
 
 
 ########################################################################
-# Find out what the latest version of libevent is to download.         #
+# *   Find out what the latest version of libevent is to download.     #
 ########################################################################
 
 echo Querying Versions on https://libevent.org... Please be patient.
@@ -242,7 +283,7 @@ rm -rf ~/github_tmux.txt
 
 
 ################################################
-#    NCurse today has a static release name    #
+#  Find out what the newest version of NCurse  #
 ################################################
 
 #  Adding versioning from archives - https://invisible-mirror.net/archives/ncurses/
@@ -264,7 +305,7 @@ rm -rf ~/mirror_ncurse.txt
 
 
 ################################################
-#             Display Versions found           #
+# *           Display Versions found           #
 ################################################
 
 echo "Static script versions."
@@ -288,16 +329,17 @@ echo    # (optional) move to a new line
 
 
 ################################################
-#         Prompt to use new version            #
+# *       Prompt to use new version            #
 ################################################
 
 read -p "Use Updated version's from WEBSITE [yY]? " -n 1 -r
 echo    # (optional) move to a new line
+
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	TMUX_VERSION=$TMUX_VER_B 
+	TMUX_VERSION=$TMUX_VER_B
 	LIB_VER=$LIB_VER_B
-	NCUR_VER=$NCUR_VER_B 
+	NCUR_VER=$NCUR_VER_B
 fi
 
 echo    # (optional) move to a new line
@@ -322,6 +364,9 @@ sleep 5
 #               ~/tmux_tmp Build directory                     #
 ################################################################
 
+# TODO prompt for installation directory if not root?
+	# user may not want it in ~/local
+
 mkdir -p $HOME/local $HOME/tmux_tmp
 cd $HOME/tmux_tmp
 
@@ -335,11 +380,12 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 echo "Downloading tmux"
 echo    # (optional) move to a new line
+
 # Orig :: wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
 wget --output-document=tmux-${TMUX_VERSION}.tar.gz -q https://github.com/tmux/tmux/archive/refs/tags/${TMUX_VERSION}.tar.gz
+
 echo "Downloaded tmux"
 echo    # (optional) move to a new line
-
 
 
 
@@ -351,7 +397,9 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 echo "Downloading libevent"
 echo    # (optional) move to a new line
+
 wget -q https://github.com/libevent/libevent/releases/download/release-${LIB_VER}-stable/libevent-${LIB_VER}-stable.tar.gz
+
 echo "Downloaded libevent"
 echo    # (optional) move to a new line
 
@@ -365,8 +413,10 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 echo "Downloading ncurse"
 echo    # (optional) move to a new line
+
 # wget -q ftp://ftp.invisible-island.net/ncurses/ncurses.tar.gz
 wget -q https://invisible-mirror.net/archives/ncurses/ncurses-${NCUR_VER}.tar.gz
+
 echo "Downloaded ncurse"
 echo    # (optional) move to a new line
 
@@ -409,7 +459,7 @@ tar xvzf ncurses-${NCUR_VER}.tar.gz
 cd ncurses*/
 
 # change to cd ncurses*/  ???
-# ncursedir=$(find . -maxdepth 1 -type d -name '*ncur*' -print -quit)    
+# ncursedir=$(find . -maxdepth 1 -type d -name '*ncur*' -print -quit)
 # cd $ncursedir				# since I can't get the version number and can't CD into it based on a captured version
 
 if [[ $SysWide == "yes" ]]; then
@@ -441,7 +491,7 @@ else
 	./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include" CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" 
 
 	make -j
-	
+
 	cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}
 		ln -s $HOME/local/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
 	# ln -s file link
@@ -464,6 +514,8 @@ echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
 
+sleep 3s
+
 printf '\033c'    # Clear screen
 echo    # (optional) move to a new line
 
@@ -481,14 +533,39 @@ exit $?
 #                                                           Extra's?                                                                #
 ####################################################################################################################################
 
-# Tmux autocomplete?
-# curl https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux > ~/.bash_completion
+# TODO: Error handling
+	# if the file isn't download ( tmux-3.1a.tar.gz doesn't exist after wget of file )
+	# if it can't parse the page for latest version
+	# if error extracting
+	# * disk space check
+
+#
+# TODO name tmux executable tmux$version and symlink it?
+	# example tmux3_3a
+
+	# ln -s exisiting file           symbolic link named file
+	# ln -s $HOME/local/bin/tmux3_3a $HOME/local/bin/tmux
+
+# * make a my_plugins file, so user can store that and have that installed as well ?
+
+# * Create answer file
+	# predefined script options?
+		# if .tmux-NodSwal is created
+		#
 
 
-# add basic config, allow github url to get users config?
+
+# * prompt to install the following or any additions ?
+	# Tmux autocomplete?
+		# curl https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux > ~/.bash_completion
+	# Tmux plugin manager
+	# plugins
+	# fzf
+	# xclip
+	# 
 
 
-
+# *add basic config, allow github url to get users config?
 
 
 	# local user install
@@ -506,64 +583,55 @@ exit $?
 	# if fzf and smenu are installed use them?
 	# store versions if not the same as in file?
 
+#
+# TODO: Check what OS? look if requirements are installed
 
-	# check what OS?
-		# look if requirements are installed
-
-
-# From Version Control, not stable, just most rescent repo compile
+# * Install Tmux from their github repo, From Version Control, not stable, just most rescent repo compile
 	# git clone https://github.com/tmux/tmux.git
 	# cd tmux
 	# sh autogen.sh
 	# ./configure
 	# make && sudo make install
 
-
+#
 # Prefer requirements to be installed from same script. ***hostnamectl | grep operating*** system, contains ubuntu, contains red hat, contains centos?
 
 		# Red Hat 7/8, CentOS 7/8
 			# Last Tested:
 			# yum install openssl-devel -y
 
-
 		# Debian, Ubuntu 18.04/20.04 LTS
 			# Last Tested:
 			# apt-get install libssl-dev -y
 
-
-		# Arch 
+		# Arch
 			# Last Tested:
 			# pacman -Syu openssl -y
-
 
 		# Raspberry Pi
 			# Last Tested:
 			# apt-get install libssl-dev -y
 
-
 		# Additional OS?
 			# tell me how to install it from new installation
 
-
+#
 # Install in addition? probably not
 	# install fonts-powerline
 	# install powerline
 	#  ** need a font that supports symbols installed on windows, nerd tree infuses hundreds of fonts with symbols
 
 
-# add a .tmux_ns.conf?
-
-
-
+#
 # VirtualBox ( self note - not related to tmux install )
 	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
 
 
-#***# code to install local without root was obtained from search on google, when I find where I got that sections from I will created that location.
-# I still don't know the exact place
 
 
 
 ####################################################################################################################################
 #                                                           END                                                                    #
 ####################################################################################################################################
+####################################################################################################################################
+
