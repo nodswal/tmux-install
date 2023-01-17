@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/01/16 19:33:55
+# Last modified: 2023/01/16 19:59:41
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -41,6 +41,8 @@
 ##########################
 # *   Install script   * #
 ##########################
+	# https://github.com/nodswal/tmux-install/blob/master/install_tmux.sh
+	# wget https://github.com/nodswal/tmux-install/blob/eda565e7c4ae73ab7ed08de48fd7945af150b3b9/install_tmux.sh
 	# git clone or git download script
 	# chmod +x ./tmux-install.sh
 	# ./tmux-install.sh or sudo ./tmux-install.sh
@@ -120,7 +122,7 @@ set -e
 # echo $? after exit to see the error code it exited for which ever command
 
 # Enable Debugging
-set -x
+# set -x
 
 
 
