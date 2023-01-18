@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/01/16 22:06:56
+# Last modified: 2023/01/17 11:11:40
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -177,6 +177,7 @@ echo $CurOS
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
 	echo "Verifying libssl-dev"
+	# Todo: check to see if package is installed before sudo, for loop?
 	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
 	sleep 5
 	sudo -k
