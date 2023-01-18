@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/01/17 11:11:40
+# Last modified: 2023/01/18 10:45:22
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -98,7 +98,6 @@ EOF
 
 
 
-
 ########################
 #     Clear Screen     #
 ########################
@@ -170,9 +169,18 @@ fi
 # base install, update, and test script, what does it need to install
 
 
+
+
+
 CurOSstr=$(hostnamectl | grep Operating)
 
 echo $CurOS
+echo $CurOS
+echo $CurOS
+echo $CurOS
+echo $CurOS
+
+sleep 10s
 
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
