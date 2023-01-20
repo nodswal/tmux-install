@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/01/18 10:45:22
+# Last modified: 2023/01/19 09:55:44
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -539,6 +539,8 @@ fi
 
 exit $?
 
+# TODO echo $_ or  $0
+source ~/.bashrc
 
 ####################################################################################################################################
 #                                                           Extra's?                                                                #
