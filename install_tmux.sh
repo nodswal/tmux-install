@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/01/19 09:55:44
+# Last modified: 2023/03/02 21:43:44
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -235,6 +235,7 @@ else
 
 fi
 
+sleep 10s
 
 
 ########################################################################
@@ -277,7 +278,7 @@ echo "Querying Version on https://github.com/tmux/tmux/releases... Please be pat
 # orig :: wget --no-check-certificate -q "https://github.com/tmux/tmux/releases" -O ~/github_tmux.txt
 wget --no-check-certificate -q "https://github.com/tmux/tmux/tags" -O ~/github_tmux.txt
 
-sleep 1
+sleep 3
 
 # orig :: TMUX_VER_B=$(grep -Pom 1 "(?<=>tmux-)[\d\.]+(?:\w)(?=\.tar\.gz)" ~/github_tmux.txt)
 TMUX_VER_B=$(grep -Pom 1 "[\d\.]+(?:\w)(?=\.tar\.gz)" ~/github_tmux.txt)
@@ -503,6 +504,7 @@ else
 
 	make -j
 
+# TODO make directory ~/local/tmux${TMUX_VERSION}/
 	cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}
 		ln -s $HOME/local/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
 	# ln -s file link
@@ -542,9 +544,11 @@ exit $?
 # TODO echo $_ or  $0
 source ~/.bashrc
 
+
 ####################################################################################################################################
 #                                                           Extra's?                                                                #
 ####################################################################################################################################
+
 
 # TODO: Error handling
 	# if the file isn't download ( tmux-3.1a.tar.gz doesn't exist after wget of file )
