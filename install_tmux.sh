@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 15:48:40
+# Last modified: 2023/03/03 17:45:23
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -379,7 +379,7 @@ sleep 5
 # TODO prompt for installation directory if not root?
 	# user may not want it in ~/local
 
-mkdir -p $HOME/local $HOME/tmux_tmp
+mkdir -p $HOME/local/tmux${TMUX_VERSION} $HOME/tmux_tmp
 cd $HOME/tmux_tmp
 
 
@@ -453,7 +453,7 @@ cd libevent-${LIB_VER}-stable
 if [[ $SysWide == "yes" ]]; then
 	./configure --disable-shared
 else
-	./configure --prefix=$HOME/local --disable-shared
+	./configure --prefix=$HOME/local/tmux${TMUX_VERSION} --disable-shared
 fi
 
 make -j
@@ -477,7 +477,7 @@ cd ncurses*/
 if [[ $SysWide == "yes" ]]; then
 	./configure
 else
-	./configure --prefix=$HOME/local
+	./configure --prefix=$HOME/local/tmux${TMUX_VERSION}
 fi
 
 make -j
@@ -500,7 +500,7 @@ if [[ $SysWide == "yes" ]]; then
 	make install
 else
 	sh ./autogen.sh
-	./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include" CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" 
+	./configure CFLAGS="-I$HOME/local/tmux${TMUX_VERSION}/include -I$HOME/local/tmux${TMUX_VERSION}/include/ncurses" LDFLAGS="-L$HOME/local/tmux${TMUX_VERSION}/lib -L$HOME/local/tmux${TMUX_VERSION}/include/ncurses -L$HOME/local/tmux${TMUX_VERSION}/include" CPPFLAGS="-I$HOME/local/tmux${TMUX_VERSION}/include -I$HOME/local/tmux${TMUX_VERSION}/include/ncurses" LDFLAGS="-static -L$HOME/local/tmux${TMUX_VERSION}/include -L$HOME/local/tmux${TMUX_VERSION}/include/ncurses -L$HOME/local/tmux${TMUX_VERSION}/lib" 
 
 	make -j
 
