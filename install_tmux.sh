@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 18:41:23
+# Last modified: 2023/03/03 19:16:12
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -48,11 +48,11 @@
 	# ./tmux-install.sh or sudo ./tmux-install.sh
 
 
-# * better
+# * better visibility
 # ! deprecated method, do not use || warning
 # ? should this method be exposed in the public api
 # TODO: refactor this moethod
-# @param myParam 
+# @param myParam
 #
 
 
@@ -95,6 +95,11 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pb
 
 
 EOF
+
+cat <<EOF > ~/.tmux-NodSwal.conf
+
+# * this will fail if the file already exist
+ln -s ~/.tmux-NodSwal.conf ~/.tmux.conf
 
 
 
@@ -174,11 +179,11 @@ fi
 
 CurOSstr=$(hostnamectl | grep Operating)
 
-echo $CurOS
-echo $CurOS
-echo $CurOS
-echo $CurOS
-echo $CurOS
+echo $CurOSstr
+echo $CurOSstr
+echo $CurOSstr
+echo $CurOSstr
+echo $CurOSstr
 
 sleep 10s
 
@@ -187,7 +192,7 @@ if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo
 	echo "Verifying libssl-dev"
 	# Todo: check to see if package is installed before sudo, for loop?
-	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
+	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake xclip
 	sleep 5
 	sudo -k
 	# dpkg -s libssl-dev
@@ -199,7 +204,7 @@ elif [[ "$CurOSstr" == *"Centos"* ]]; then
 	#rpm -qa | grep openssl-devel
 
 
-elif [[ "$CurOSstr" == *"Red"* ]]; then
+elif [[ "$CurOSstr" == *"Red Hat Enterprise Linux"* ]]; then
 	echo "Verifying Red Hat environment"
 	echo "Verifying openssl-devel"
 	#rpm -qa | grep openssl-devel
@@ -257,7 +262,7 @@ sleep 10s
 
 echo Querying Versions on https://libevent.org... Please be patient.
 wget --no-check-certificate -q "https://libevent.org/" -O ~/libevent_org.txt
-sleep 1
+sleep 3
 
 LIB_VER_B=$(grep -Pom 1 "(?<=>libevent-)[\d\.]+(?=-stable\.tar\.gz)" ~/libevent_org.txt)
 
@@ -276,7 +281,6 @@ rm -rf ~/libevent_org.txt
 ################################################
 
 echo "Querying Version on https://github.com/tmux/tmux/releases... Please be patient."
-# orig :: wget --no-check-certificate -q "https://github.com/tmux/tmux/releases" -O ~/github_tmux.txt
 wget --no-check-certificate -q "https://github.com/tmux/tmux/tags" -O ~/github_tmux.txt
 
 sleep 3
@@ -334,7 +338,7 @@ echo "Newest Tmux Ver    : 		$TMUX_VER_B"
 echo "Newest Libevent Ver: 		$LIB_VER_B"
 echo "Newest NCURSES Ver : 		$NCUR_VER_B"
 
-sleep 5s
+sleep 6s
 
 echo    # (optional) move to a new line
 echo    # (optional) move to a new line
@@ -394,7 +398,6 @@ echo    # (optional) move to a new line
 echo "Downloading tmux"
 echo    # (optional) move to a new line
 
-# Orig :: wget -q https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
 wget --output-document=tmux-${TMUX_VERSION}.tar.gz -q https://github.com/tmux/tmux/archive/refs/tags/${TMUX_VERSION}.tar.gz
 
 echo "Downloaded tmux"
@@ -427,7 +430,6 @@ echo    # (optional) move to a new line
 echo "Downloading ncurse"
 echo    # (optional) move to a new line
 
-# wget -q ftp://ftp.invisible-island.net/ncurses/ncurses.tar.gz
 wget -q https://invisible-mirror.net/archives/ncurses/ncurses-${NCUR_VER}.tar.gz
 
 echo "Downloaded ncurse"
