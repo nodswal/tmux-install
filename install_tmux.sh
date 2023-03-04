@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 18:05:25
+# Last modified: 2023/03/03 18:12:06
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -184,6 +184,19 @@ sleep 10s
 
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!"
+	echo
+	echo              .-.
+	echo        .-'``(|||)
+	echo     ,`\ \    `-`.               88                         88
+	echo    /   \ '``-.   `              88                         88
+	echo  .-.  ,       `___:    88   88  88,888,  88   88  ,88888, 88888  88   88
+	echo (:::) :        ___     88   88  88   88  88   88  88   88  88    88   88
+	echo  `-`  `       ,   :    88   88  88   88  88   88  88   88  88    88   88
+	echo    \   / ,..-`   ,     88   88  88   88  88   88  88   88  88    88   88
+	echo     `./ /    .-.`      '88888'  '88888'  '88888'  88   88  '8888 '88888'
+	echo LGB    `-..-(   )
+	echo              `-`
+	echo
 	echo "Verifying libssl-dev"
 	# Todo: check to see if package is installed before sudo, for loop?
 	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
