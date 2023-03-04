@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 19:16:12
+# Last modified: 2023/03/03 19:24:07
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -96,7 +96,6 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pb
 
 EOF
 
-cat <<EOF > ~/.tmux-NodSwal.conf
 
 # * this will fail if the file already exist
 ln -s ~/.tmux-NodSwal.conf ~/.tmux.conf
