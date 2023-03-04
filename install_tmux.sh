@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 17:45:23
+# Last modified: 2023/03/03 18:05:25
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -504,10 +504,10 @@ else
 
 	make -j
 
-# TODO make directory ~/local/bin/tmux${TMUX_VERSION}/tmux${TMUX_VERSION}
+# TODO make directory ~/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
 	# cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}
-	  cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}/tmux${TMUX_VERSION}
-		ln -s $HOME/local/bin/tmux${TMUX_VERSION}/tmux${TMUX_VERSION} $HOME/local/bin/tmux
+	  cp -f tmux $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
+		ln -s $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION} $HOME/local/tmux
 	# ln -s file link
 fi
 
@@ -536,8 +536,8 @@ echo    # (optional) move to a new line
 if [[ $SysWide == "yes" ]]; then
 	echo "Installed System Wide."
 else
-	echo "$HOME/local/bin/tmux is now available. You can optionally add $HOME/local/bin to your PATH."
-	echo "export PATH=\$PATH:\$HOME/local/bin # TmuxInstaller" >> ~/.bashrc
+	echo "$HOME/local/tmux is now available. You can optionally add $HOME/local to your PATH."
+	echo "export PATH=\$PATH:\$HOME/local # Install_Tmux.sh" >> ~/.bashrc
 fi
 
 exit $?
