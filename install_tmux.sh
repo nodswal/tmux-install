@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 18:34:39
+# Last modified: 2023/03/03 18:41:23
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -508,7 +508,7 @@ else
 # TODO make directory ~/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
 	# cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}
 	  cp -f tmux $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
-		ln -s $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION} $HOME/local/bin
+		ln -s $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
 	# ln -s file link
 fi
 
