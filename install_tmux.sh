@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/03 19:24:07
+# Last modified: 2023/03/05 15:00:46
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -38,14 +38,19 @@
 	# have basic and Nod influenced .tmux scripts
 
 
-##########################
-# *   Install script   * #
-##########################
+###############################
+# *   Install this script   * #
+###############################
 	# https://github.com/nodswal/tmux-install/blob/master/install_tmux.sh
 	# wget https://github.com/nodswal/tmux-install/blob/eda565e7c4ae73ab7ed08de48fd7945af150b3b9/install_tmux.sh
 	# git clone or git download script
 	# chmod +x ./tmux-install.sh
 	# ./tmux-install.sh or sudo ./tmux-install.sh
+
+
+###############################
+# *   My VS Code Plugins    * #
+###############################
 
 
 # * better visibility
@@ -59,34 +64,59 @@
 # * Create .tmux-NodSwal.conf
 cat <<EOF > ~/.tmux-NodSwal.conf
 
-# Config for version 3.0+
+# * Config for version 3.0+
 
-# Set prefix to Ctrl-Space instead of Ctrl-b
+
+# * Set prefix to Ctrl-Space instead of Ctrl-b
 unbind C-b
 set -g prefix C-Space
 bind Space send-prefix
 
-# Split windows using | and -
+
+# * Split windows using | and -
 unbind '"'
 unbind %
 bind | split-window -h
 bind - split-window -v
 
-# Mouse mode
-set -g mouse on
 
 bind r source-file ~/.tmux.conf \; display "Config reloaded!"
 
-unbind-key -T copy-mode-vi v
 
-bind-key -T copy-mode-vi v send-keys -X begin-selection
-bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
-bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+# * Mouse mode
+set -g mouse on
 
-# install xclip ?
-# plugins ?
-# fzf ?
+# * These bindings are for X Windows only. If you're using a different
+# * window system you have to replace the `xsel` commands with something
+# * else. See https://github.com/tmux/tmux/wiki/Clipboard#available-tools
+
+bind -T copy-mode    DoubleClick1Pane select-pane \; send -X select-word \; send -X copy-pipe-no-clear "xsel -i"
+bind -T copy-mode-vi DoubleClick1Pane select-pane \; send -X select-word \; send -X copy-pipe-no-clear "xsel -i"
+bind -n DoubleClick1Pane select-pane \; copy-mode -M \; send -X select-word \; send -X copy-pipe-no-clear "xsel -i"
+bind -T copy-mode    TripleClick1Pane select-pane \; send -X select-line \; send -X copy-pipe-no-clear "xsel -i"
+bind -T copy-mode-vi TripleClick1Pane select-pane \; send -X select-line \; send -X copy-pipe-no-clear "xsel -i"
+bind -n TripleClick1Pane select-pane \; copy-mode -M \; send -X select-line \; send -X copy-pipe-no-clear "xsel -i"
+bind -n MouseDown2Pane run "tmux set-buffer -b primary_selection \"$(xsel -o)\"; tmux paste-buffer -b primary_selection; tmux delete-buffer -b primary_selection"
+
+
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @yank_action 'copy-pipe-no-clear'
+bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
+bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
+
+
+
+# * Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+
+
+
+# * install xclip? xsel?
+# * plugins ?
+# 		* Extracto
+# * 	* fzf
 
 # * use ctrl + space is prefix?
 # unbind C-Space
