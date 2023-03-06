@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/05 15:00:46
+# Last modified: 2023/03/05 15:21:04
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -67,8 +67,9 @@ cat <<EOF > ~/.tmux-NodSwal.conf
 # * Config for version 3.0+
 
 
-# * Set prefix to Ctrl-Space instead of Ctrl-b
+# * Set prefix to Control-A ::AND:: Ctrl-Space instead of Ctrl-b
 unbind C-b
+set -g prefix C-a
 set -g prefix C-Space
 bind Space send-prefix
 
