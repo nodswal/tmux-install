@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Master <
 
-# Last modified: 2023/03/05 15:21:04
+# Last modified: 2023/03/06 10:30:02
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -70,7 +70,7 @@ cat <<EOF > ~/.tmux-NodSwal.conf
 # * Set prefix to Control-A ::AND:: Ctrl-Space instead of Ctrl-b
 unbind C-b
 set -g prefix C-a
-set -g prefix C-Space
+set -g prefix2 C-Space
 bind Space send-prefix
 
 
@@ -578,6 +578,8 @@ exit $?
 # TODO echo $_ or  $0
 source ~/.bashrc
 
+echo "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+echo "tmux, prefix then shift + I"
 
 ####################################################################################################################################
 #                                                           Extra's?                                                                #
