@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/11 08:54:59
+# Last modified: 2023/03/11 08:58:47
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -244,7 +244,7 @@ if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	sudo apt-get install xclip xsel git
 	
 	if [ "$inTesting" == "y" ]; then
-		do sudo apt-get install openssh-server -y
+		sudo apt-get install openssh-server -y
 	else
 		echo not testing, not installing openssh-server
 	fi
