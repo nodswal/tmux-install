@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/11 08:45:04
+# Last modified: 2023/03/11 08:54:59
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -235,10 +235,14 @@ if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	echo "Ubuntu, verifying environment!  If this passes no need to sudo install apps"
 	echo
 	echo "Verifying libssl-dev"
+
 	# Todo: check to see if package is installed before sudo, for loop?
+
 	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
-	echo "Installing Extra's: xclip, xsel, git
+
+	echo "Installing Extra's: xclip, xsel, git"
 	sudo apt-get install xclip xsel git
+	
 	if [ "$inTesting" == "y" ]; then
 		do sudo apt-get install openssh-server -y
 	else
