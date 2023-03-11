@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/11 08:17:07
+# Last modified: 2023/03/11 08:45:04
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -17,6 +17,9 @@
 
 # * New to this version
 	# Detect NCurses Version
+
+# * Variables
+inTesting="y"
 
 
 # ? MY git Notes
@@ -221,8 +224,6 @@ fi
 
 
 
-
-
 CurOSstr=$(hostnamectl | grep Operating)
 
 echo $CurOSstr
@@ -238,6 +239,13 @@ if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
 	echo "Installing Extra's: xclip, xsel, git
 	sudo apt-get install xclip xsel git
+	if [ "$inTesting" == "y" ]; then
+		do sudo apt-get install openssh-server -y
+	else
+		echo not testing, not installing openssh-server
+	fi
+
+
 	sleep 5
 	sudo -k
 	# dpkg -s libssl-dev
