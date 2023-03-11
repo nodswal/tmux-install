@@ -1,7 +1,7 @@
 #!/usr/bin/bash
-# Master <
+# * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/06 10:30:02
+# Last modified: 2023/03/11 08:17:07
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -33,7 +33,7 @@
 # ./install_tmux.sh
 
 
-# * ADD if ~/.tmux.conf exist, name ~/.tmux-NodSwal.conf ?
+# * ADD if ~/.tmux.conf exist, name ~/.tmux-NS.conf ?
 	# * Maybe add to a non root directory ( ~/ )
 	# have basic and Nod influenced .tmux scripts
 
@@ -47,11 +47,17 @@
 	# chmod +x ./tmux-install.sh
 	# ./tmux-install.sh or sudo ./tmux-install.sh
 
+	# TODO: Detect if there is a newer version?
+
 
 ###############################
-# *   My VS Code Plugins    * #
+# TODO *   My VS Code Plugins    * #
 ###############################
 
+# Prettier
+
+
+###############################
 
 # * better visibility
 # ! deprecated method, do not use || warning
@@ -61,8 +67,16 @@
 #
 
 
-# * Create .tmux-NodSwal.conf
-cat <<EOF > ~/.tmux-NodSwal.conf
+# Todo: Basic install or menu based install
+# * whiptail checkbox menu selection?
+# ? Put in test mode
+
+
+# * Create .tmux-NS.conf
+cat <<EOF > ~/.tmux-NS.conf
+
+# * NodSwal install-tmux config
+# * https://github.com/nodswal/tmux-install
 
 # * Config for version 3.0+
 
@@ -107,6 +121,8 @@ set -g @yank_action 'copy-pipe-no-clear'
 bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 
+# Plugin extractor
+# fzf ?
 
 
 # * Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
@@ -129,7 +145,7 @@ EOF
 
 
 # * this will fail if the file already exist
-ln -s ~/.tmux-NodSwal.conf ~/.tmux.conf
+ln -s ~/.tmux-NS.conf ~/.tmux.conf
 
 
 
@@ -210,19 +226,18 @@ fi
 CurOSstr=$(hostnamectl | grep Operating)
 
 echo $CurOSstr
-echo $CurOSstr
-echo $CurOSstr
-echo $CurOSstr
-echo $CurOSstr
+echo ""
 
 sleep 10s
 
 if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
-	echo "Ubuntu, verifying environment!"
+	echo "Ubuntu, verifying environment!  If this passes no need to sudo install apps"
 	echo
 	echo "Verifying libssl-dev"
 	# Todo: check to see if package is installed before sudo, for loop?
-	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake xclip
+	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
+	echo "Installing Extra's: xclip, xsel, git
+	sudo apt-get install xclip xsel git
 	sleep 5
 	sudo -k
 	# dpkg -s libssl-dev
@@ -272,6 +287,14 @@ else
 fi
 
 sleep 10s
+
+
+########################################################################
+#                  Install TPM (Tmux plugin Manager)                   #
+########################################################################
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 
 
 ########################################################################
