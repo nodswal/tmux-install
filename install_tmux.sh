@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/22 06:55:57
+# Last modified: 2023/03/22 07:11:17
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -93,13 +93,14 @@ set -g prefix2 C-Space
 bind Space send-prefix
 
 
-# * Split windows using | and -
+# * Split windows using | and - instead of " and %, maybe use these for full screen splits
 unbind '"'
 unbind %
 bind | split-window -h
 bind - split-window -v
 
 
+# * Reload tmux with prefix + r
 bind r source-file ~/.tmux.conf \; display "Config reloaded!"
 
 
@@ -138,9 +139,7 @@ run '~/.tmux/plugins/tpm/tpm'
 
 
 
-# * install xclip? xsel?
 # * plugins ?
-# 		* Extracto
 # * 	* fzf
 
 # * use ctrl + space is prefix?
@@ -247,7 +246,7 @@ if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 
 	echo "Installing Extra's: xclip, xsel, git"
 	sudo apt-get install xclip xsel git -y
-	
+
 	if [ "$inTesting" == "y" ]; then
 		sudo apt-get install openssh-server -y
 	else
@@ -621,7 +620,22 @@ source ~/.bashrc
 echo "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
 source ~/.bashrc
 ~/.tmux/plugins/tpm/bin/install_plugins
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 echo "tmux, prefix then shift + I"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ####################################################################################################################################
 #                                                           Extra's?                                                                #
