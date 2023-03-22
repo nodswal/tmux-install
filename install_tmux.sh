@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/21 21:43:42
+# Last modified: 2023/03/22 06:34:00
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -620,6 +620,7 @@ exit $?
 source ~/.bashrc
 
 echo "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+exec bash
 ~/.tmux/plugins/tpm/bin/install_plugins
 echo "tmux, prefix then shift + I"
 
