@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/22 07:27:24
+# Last modified: 2023/03/22 07:36:58
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -616,6 +616,8 @@ fi
 
 
 # TODO need to source .bashrc so it knows where tmux is installed to update tmux plugins
+
+source ~/.bashrc
 
 echo "Install tmux plugins"
 ~/.tmux/plugins/tpm/bin/install_plugins
