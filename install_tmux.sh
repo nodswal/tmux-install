@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/22 06:45:30
+# Last modified: 2023/03/22 06:55:57
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -124,6 +124,7 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'laktak/extrakto'   # prefix + TAB
 set -g @plugin 'jimeh/tmux-themepack'
+	set -g @themepack 'powerline/block/blue'
 set -g @plugin 'sainnhe/tmux-fzf'
 
 set -g @yank_action 'copy-pipe-no-clear'
