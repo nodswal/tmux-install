@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/11 08:58:47
+# Last modified: 2023/03/21 21:43:42
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -74,6 +74,8 @@ inTesting="y"
 # * whiptail checkbox menu selection?
 # ? Put in test mode
 
+# TODO: install plugins, probably near the end
+# Todo: ~/.tmux/plugins/tpm/bin/install_plugins
 
 # * Create .tmux-NS.conf
 cat <<EOF > ~/.tmux-NS.conf
@@ -120,6 +122,10 @@ bind -n MouseDown2Pane run "tmux set-buffer -b primary_selection \"$(xsel -o)\";
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'laktak/extrakto'   # prefix + TAB
+set -g @plugin 'jimeh/tmux-themepack'
+set -g @plugin 'sainnhe/tmux-fzf'
+
 set -g @yank_action 'copy-pipe-no-clear'
 bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
@@ -238,10 +244,10 @@ if   [[ "$CurOSstr" == *"Ubuntu"* ]]; then
 
 	# Todo: check to see if package is installed before sudo, for loop?
 
-	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake
+	sudo apt-get install libssl-dev autotools-dev automake pkg-config bison autoconf libtool pkg-config cmake -y
 
 	echo "Installing Extra's: xclip, xsel, git"
-	sudo apt-get install xclip xsel git
+	sudo apt-get install xclip xsel git -y
 	
 	if [ "$inTesting" == "y" ]; then
 		sudo apt-get install openssh-server -y
@@ -614,6 +620,7 @@ exit $?
 source ~/.bashrc
 
 echo "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+~/.tmux/plugins/tpm/bin/install_plugins
 echo "tmux, prefix then shift + I"
 
 ####################################################################################################################################
