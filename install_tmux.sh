@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/22 06:34:00
+# Last modified: 2023/03/22 06:45:30
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -16,7 +16,7 @@
 
 
 # * New to this version
-	# Detect NCurses Version
+	# 
 
 # * Variables
 inTesting="y"
@@ -130,8 +130,6 @@ set -g @yank_action 'copy-pipe-no-clear'
 bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 
-# Plugin extractor
-# fzf ?
 
 
 # * Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
@@ -620,7 +618,7 @@ exit $?
 source ~/.bashrc
 
 echo "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
-exec bash
+source ~/.bashrc
 ~/.tmux/plugins/tpm/bin/install_plugins
 echo "tmux, prefix then shift + I"
 
