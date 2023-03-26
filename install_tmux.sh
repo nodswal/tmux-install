@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/26 08:49:21
+# Last modified: 2023/03/26 09:10:39
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -621,7 +621,7 @@ PATH=$HOME/local/bin/:$PATH
 
 echo ""
 echo "Install tmux plugins"
-~/.tmux/plugins/tpm/bin/install_plugins
+~/.tmux/plugins/tpm/bin/install_plugins 2>/dev/null
 echo $?
 
 echo ""
