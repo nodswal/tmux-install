@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/22 11:11:22
+# Last modified: 2023/03/26 08:49:21
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -619,10 +619,12 @@ fi
 
 PATH=$HOME/local/bin/:$PATH
 
+echo ""
 echo "Install tmux plugins"
 ~/.tmux/plugins/tpm/bin/install_plugins
 echo $?
 
+echo ""
 echo "Git fzf, install fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
