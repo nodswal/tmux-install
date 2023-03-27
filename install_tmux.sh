@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/03/26 09:58:05
+# Last modified: 2023/03/27 08:07:42
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -627,7 +627,7 @@ echo $?
 echo ""
 echo "Git fzf, install fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git /home/eric/.fzf
-~/.fzf/install
+/home/eric/.fzf/install
 
 echo "tmux, prefix, shift + I to install any other plugins"
 
