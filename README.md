@@ -8,7 +8,9 @@ It does a basic parse using curl to save the webpage local, and then greps for a
 
 Primary OS's I have tested with...
 
-  -Ubuntu 20.04 LTS
+  -Ubuntu
+    20.04 LTS
+    22.04 LTS
   
   -Linux Mint
 
@@ -18,13 +20,15 @@ Primary OS's I have tested with...
 
   -raspbian (Buster/Strech)
   
+  ...
+  
 -Requirements
   openssl package which has libssl ( Not required by this script, but required by tmux build process )
   If you need to know the package read the script.
   
 # Installation
+  git clone https://github.com/nodswal/tmux-install
 
-git clone https://github.com/nodswal/tmux-install
 
 $ Upgrade script
 cd ~/.tmux-install && git pull 
