@@ -1,13 +1,14 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/04/24 21:00:48
+# Last modified: 2023/04/24 21:03:14
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
 
 # * Author: NodSwal, https://github.com/nodswal/tmux-install
 	# Even though our paths have crossed, that does not mean we are in the same place in our journies.
+	# git clone --branch MakeChangesHere https://github.com/nodswal/tmux-install.git
 
 
 # * Description:
