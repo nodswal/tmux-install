@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/04/24 21:03:14
+# Last modified: 2023/04/27 23:35:52
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -127,13 +127,17 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'laktak/extrakto'   # prefix + TAB
 set -g @plugin 'jimeh/tmux-themepack'
-	set -g @themepack 'powerline/block/blue'
+set -g @themepack 'powerline/block/blue'
 set -g @plugin 'sainnhe/tmux-fzf'
 
 set -g @yank_action 'copy-pipe-no-clear'
 bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 
+
+# * Automatic TPM installation || https://github.com/tmux-plugins/tpm/blob/master/docs/automatic_tpm_installation.md
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
 
 # * Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
