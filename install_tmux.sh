@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/05/13 14:04:58
+# Last modified: 2023/05/13 14:08:47
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -30,7 +30,6 @@ if [[ $testing == "y" ]]; then
 	echo "Testing mode: removed ~/local/ ~/.tmux ~/.tmux.conf ~/.tmux-NS.conf ~/.tmux-NodSwal.conf ~/tmux_tmp"
 fi
 
-exit
 
 # ? MY git Notes
 	# store changes if any made before pull 			= 		# git stash
