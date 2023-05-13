@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/04/27 23:35:52
+# Last modified: 2023/05/13 14:04:58
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -16,20 +16,27 @@
 	# Install latest version of Tmux, libevent, ncurse as standard user in home directory, or system wide as root.
 
 
+# TODO error handling https://medium.com/@BetterIsHeather/error-handling-in-bash-b9024b848431
+
 # * New to this version
 	#
 
 # * Variables
-inTesting="y"
-rm -rf ~/local/ ~/.tmux ~/.tmux.conf ~/.tmux-NS.conf ~/.tmux-NodSwal.conf ~/tmux_tmp
+testing="y"
 
+# * Cleanup during testing
+if [[ $testing == "y" ]]; then
+	rm -rf ~/local/ ~/.tmux ~/.tmux.conf ~/.tmux-NS.conf ~/.tmux-NodSwal.conf ~/tmux_tmp
+	echo "Testing mode: removed ~/local/ ~/.tmux ~/.tmux.conf ~/.tmux-NS.conf ~/.tmux-NodSwal.conf ~/tmux_tmp"
+fi
+
+exit
 
 # ? MY git Notes
 	# store changes if any made before pull 			= 		# git stash
 	# get latest branches data from github 				= 		# git pull
 	# switch branch
 	# testing git process, some more
-
 
 # * Detect age of script, prompt for git pull?
 # git reset --hard # chmod +x ./install_tmux.sh causes change
@@ -78,6 +85,7 @@ rm -rf ~/local/ ~/.tmux ~/.tmux.conf ~/.tmux-NS.conf ~/.tmux-NodSwal.conf ~/tmux
 
 # TODO: install plugins, probably near the end
 # Todo: ~/.tmux/plugins/tpm/bin/install_plugins
+
 
 # * Create .tmux-NS.conf
 cat <<EOF > ~/.tmux-NS.conf
@@ -174,6 +182,7 @@ printf '\033c'    # Clear screen
 #     exit on error    #
 ########################
 
+# https://medium.com/@BetterIsHeather/error-handling-in-bash-b9024b848431
 set -e
 
 
@@ -277,6 +286,8 @@ elif [[ "$CurOSstr" == *"Red Hat Enterprise Linux"* ]]; then
 	# rpm -qa | grep openssl-devel
 	# libevent-devel ncurses-devel gcc make bison pkg-config
 	# TODO https://github.com/tmux/tmux/wiki/Installing
+	# TODO https://dvtalk.me/2020/07/23/install-tmux-without-root-and-internet-access/
+
 
 
 elif [[ "$CurOSstr" == *"Arch"* ]]; then
@@ -687,7 +698,10 @@ echo "tmux, prefix, shift + I to install any other plugins"
 	# plugins
 	# fzf
 	# xclip
-	# 
+	#
+
+# * Zenity dialog GUI
+# https://medium.com/geekculture/modernize-the-linux-terminal-and-shell-scripts-by-adding-gui-729fdedb4b1e
 
 
 # *add basic config, allow github url to get users config?
@@ -752,6 +766,7 @@ echo "tmux, prefix, shift + I to install any other plugins"
 	# Ubuntu additions - sudo apt install build-essential dkms linux-headers-$(uname -r)
 
 
+# Windows issue on my third screen - For a black screen, use the following keyboard shortcut: Windows logo key + Ctrl + Shift + B.
 
 
 
