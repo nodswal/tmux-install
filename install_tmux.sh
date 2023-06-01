@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/06/01 10:10:48
+# Last modified: 2023/06/01 10:17:44
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -91,10 +91,11 @@ cat <<EOF > ~/.tmux-NS.conf
 
 # * NodSwal install-tmux config
 # * https://github.com/nodswal/tmux-install
-
 # * Config for version 3.0+
 
 
+# * Switch to another session when current session is closed
+set-option -g detach-on-destroy off
 
 
 # * Set prefix to Control-A ::AND:: Ctrl-Space instead of Ctrl-b
@@ -139,6 +140,7 @@ set -g @plugin 'jimeh/tmux-themepack'
 set -g @themepack 'powerline/block/blue'
 set -g @plugin 'sainnhe/tmux-fzf'
 
+
 set -g @yank_action 'copy-pipe-no-clear'
 bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
 bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
@@ -166,7 +168,7 @@ run '~/.tmux/plugins/tpm/tpm'
 EOF
 
 
-# * this will fail if the file already exist
+# * this will fail if the .tmux.conf already exist ( yay, don't overwrite their stuff )
 ln -s ~/.tmux-NS.conf ~/.tmux.conf
 
 
@@ -200,7 +202,7 @@ set -e
 
 
 ################################################
-# *     Updated VERSION Defaults 2023.01.12     #
+# *    Updated VERSION Defaults 2023.01.12     #
 ################################################
 
 # left as older versions for testing the parse for new versions
@@ -212,7 +214,7 @@ NCUR_VER=6.2
 
 
 ################################################
-# * Root User Detection - Install System Wide?  #
+# * Root User Detection - Install System Wide? #
 ################################################
 
 if [ "$EUID" -eq 0 ]
@@ -231,7 +233,7 @@ fi
 
 
 ################################################
-# TODO    OS Make and Model to make descisions     #
+# TODO    OS Make and Model to make descisions #
 ################################################
 
 # Do I need build tools for each OS?
@@ -334,7 +336,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
 ########################################################################
-#                  Clean UP in case issue last run                     #
+#          Clean UP in case any issue's occured last run               #
 ########################################################################
 
 [[ -f ~/libevent_org.txt ]] && rm -rf ~/libevent_org.txt
