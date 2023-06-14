@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # * Branch: MakeChangesHere <
 
-# Last modified: 2023/06/01 10:17:44
+# Last modified: 2023/06/04 15:11:02
 
 # * NO warrenties are implied by this script, use of script is at your own RISK.
 	# AKA Read and use VM to test script before using it on a system.
@@ -92,6 +92,10 @@ cat <<EOF > ~/.tmux-NS.conf
 # * NodSwal install-tmux config
 # * https://github.com/nodswal/tmux-install
 # * Config for version 3.0+
+
+
+# A New resource I found for tmux that links to a bunch of stuff
+# * https://github.com/rothgar/awesome-tmux
 
 
 # * Switch to another session when current session is closed
@@ -600,8 +604,8 @@ else
 
 # TODO make directory ~/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
 	# cp -f tmux $HOME/local/bin/tmux${TMUX_VERSION}
-	  cp -f tmux $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
-		ln -s $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
+	cp -f tmux $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION}
+	ln -s $HOME/local/tmux${TMUX_VERSION}/bin/tmux${TMUX_VERSION} $HOME/local/bin/tmux
 	# ln -s file link
 fi
 
@@ -653,16 +657,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git /home/eric/.fzf
 # /home/eric/.fzf/install
 
 echo "tmux, prefix, shift + I to install any other plugins"
-
-
-
-
-
-
-
-
-
-
 
 
 
